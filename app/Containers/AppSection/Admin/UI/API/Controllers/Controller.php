@@ -16,6 +16,7 @@ use App\Containers\AppSection\Admin\Actions\UpdateAdminAction;
 use App\Containers\AppSection\Admin\Actions\DeleteAdminAction;
 use App\Containers\AppSection\Admin\UI\API\Requests\AdminloginRequest;
 use App\Containers\AppSection\Admin\UI\API\Transformers\AdminloginTransformer;
+use App\Containers\AppSection\Admin\UI\API\Transformers\FindIdTransformer;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 
@@ -38,7 +39,7 @@ class Controller extends ApiController
     public function findAdminById(FindAdminByIdRequest $request): array
     {
         $admin = app(FindAdminByIdAction::class)->run($request);
-        return $this->transform($admin, AdminTransformer::class);
+        return $this->transform($admin, FindIdTransformer::class);
     }
 
     public function getAllAdmins(GetAllAdminsRequest $request): array

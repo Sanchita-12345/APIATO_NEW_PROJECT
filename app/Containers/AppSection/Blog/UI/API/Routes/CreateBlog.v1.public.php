@@ -22,7 +22,7 @@
 use App\Containers\AppSection\Blog\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::post('blogs', [Controller::class, 'createBlog'])
-    ->name('api_blog_create_blog')
-    ->middleware(['auth:api']);
+Route::post('createblogs', [Controller::class, 'createBlog']);
+    // ->name('api_blog_create_blog')
+    // ->middleware(['auth:api']);
 

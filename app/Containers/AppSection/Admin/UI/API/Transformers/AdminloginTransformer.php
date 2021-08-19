@@ -21,26 +21,11 @@ class AdminloginTransformer extends Transformer
 
     ];
 
-    public function transform($token): array
+    public function transform( String $token): array
     {
         $response = [
-            'object' => 'Token',
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            // 'id' => $admin->getHashedKey(),
-            // 'created_at' => $admin->created_at,
-            // 'updated_at' => $admin->updated_at,
-            // 'readable_created_at' => $admin->created_at->diffForHumans(),
-            // 'readable_updated_at' => $admin->updated_at->diffForHumans(),
-            'message' => 'succesfully logged in',
-            // 'token' => $token
+            $token
         ];
-
-        // $response = $this->ifAdmin([
-        //     'real_id'    => $admin->id,
-        //     // 'deleted_at' => $admin->deleted_at,
-        // ], $response);
-
         return $response;
     }
 }

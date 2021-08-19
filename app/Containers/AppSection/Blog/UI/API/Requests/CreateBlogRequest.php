@@ -36,6 +36,8 @@ class CreateBlogRequest extends Request
     {
         return [
             // 'id' => 'required'
+            'title' => 'required|string',
+            'description' => 'required|string'
         ];
     }
 

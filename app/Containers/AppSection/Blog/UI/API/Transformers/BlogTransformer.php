@@ -24,20 +24,8 @@ class BlogTransformer extends Transformer
     public function transform(Blog $blog): array
     {
         $response = [
-            'object' => $blog->getResourceKey(),
-            'id' => $blog->getHashedKey(),
-            'created_at' => $blog->created_at,
-            'updated_at' => $blog->updated_at,
-            'readable_created_at' => $blog->created_at->diffForHumans(),
-            'readable_updated_at' => $blog->updated_at->diffForHumans(),
-
+            'message' => 'blog created successfully'
         ];
-
-        $response = $this->ifAdmin([
-            'real_id'    => $blog->id,
-            // 'deleted_at' => $blog->deleted_at,
-        ], $response);
-
         return $response;
     }
 }

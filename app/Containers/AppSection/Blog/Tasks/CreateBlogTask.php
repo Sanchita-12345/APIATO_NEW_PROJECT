@@ -2,27 +2,33 @@
 
 namespace App\Containers\AppSection\Blog\Tasks;
 
-use App\Containers\AppSection\Blog\Data\Repositories\BlogRepository;
-use App\Ship\Exceptions\CreateResourceFailedException;
+use App\Containers\AppSection\Blog\Models\Blog;
 use App\Ship\Parents\Tasks\Task;
-use Exception;
+use JWTAuth;
+use Log;
 
 class CreateBlogTask extends Task
 {
-    protected BlogRepository $repository;
+    protected Blog $repository;
 
-    public function __construct(BlogRepository $repository)
+    public function __construct(Blog $repository)
     {
         $this->repository = $repository;
     }
 
-    public function run(array $data)
-    {
-        try {
-            return $this->repository->create($data);
-        }
-        catch (Exception $exception) {
-            throw new CreateResourceFailedException();
-        }
+    public function run(String $title, String $description)
+    {    
+        $token = JWTAuth::getToken();
+        $details = JWTAuth::getPayload($token)->toArray();
+        $id = $details["sub"];
+
+            $blog =  $this->repository->create([
+                'title' => $title,
+                'description' => $description,
+                'admin_id' => $id,
+
+            ]);
+        Log::info($blog);
+        return $blog;
     }
 }

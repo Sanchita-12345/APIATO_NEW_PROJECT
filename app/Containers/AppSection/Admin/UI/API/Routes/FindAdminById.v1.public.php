@@ -22,7 +22,7 @@
 use App\Containers\AppSection\Admin\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('admins/{id}', [Controller::class, 'findAdminById'])
-    ->name('api_admin_find_admin_by_id')
-    ->middleware(['auth:api']);
+Route::get('admins/{id}', [Controller::class, 'findAdminById']);
+    // ->name('api_admin_find_admin_by_id')
+    // ->middleware(['auth:api']);
 

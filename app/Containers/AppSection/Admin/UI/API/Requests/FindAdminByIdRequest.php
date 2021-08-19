@@ -35,7 +35,7 @@ class FindAdminByIdRequest extends Request
     public function rules(): array
     {
         return [
-            'id' => 'required'
+            'id' => 'required|exists:users,id'
         ];
     }
 

@@ -14,38 +14,10 @@ class AdminloginAction extends Action
 {
     public function run(AdminloginRequest $request)
     {
-        // $var = app(Task::class)->run($arg1, $arg2);
-        $sanitizedData = $request->sanitizeInput([
-            'email',
-            'password',
-        ]);
         $admin = app(AdminloginTask::class)->run(
-            true,
             $request->email,
             $request->password,
-            // $email, $password
-            // $sanitizedData
         );
-        $isSuccessful = app(AdminloginTask::class)->run(
-            $sanitizedData['email'],
-            $sanitizedData['password']
-        );
-        $email = $request->get('email');
-        $user = Admin::where('email', $email)->first();
-        $token = JWTAuth::fromUser($user);
-        return $token;
-        if ($isSuccessful) {
-            $user = Admin::user();
-        } else {
-            throw new LoginFailedException();
-        }
-
-        $isUserConfirmed = app(CheckIfUserEmailIsConfirmedTask::class)->run($user);
-
-        if (!$isUserConfirmed) {
-            throw new UserNotConfirmedException();
-        }
-
-        return $token;
+        return $admin;
     }
 }
