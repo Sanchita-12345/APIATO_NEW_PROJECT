@@ -15,6 +15,7 @@ class UpdateBlogAction extends Action
     {
         $blog = app(UpdateBlogTask::class)->run(
             // add your request data here
+            $request->id,
             $request->title,
             $request->description,
         );

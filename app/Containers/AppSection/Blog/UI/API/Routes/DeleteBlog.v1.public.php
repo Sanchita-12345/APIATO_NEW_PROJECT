@@ -22,7 +22,7 @@
 use App\Containers\AppSection\Blog\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::delete('blogs/{id}', [Controller::class, 'deleteBlog'])
-    ->name('api_blog_delete_blog')
-    ->middleware(['auth:api']);
+Route::post('deleteblog', [Controller::class, 'deleteBlog']);
+    // ->name('api_blog_delete_blog')
+    // ->middleware(['auth:api']);
 

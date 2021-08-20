@@ -14,6 +14,7 @@ use App\Containers\AppSection\Blog\Actions\GetAllBlogsAction;
 use App\Containers\AppSection\Blog\Actions\UpdateBlogAction;
 use App\Containers\AppSection\Blog\Actions\DeleteBlogAction;
 use App\Containers\AppSection\Blog\Tasks\UpdateBlogTask;
+use App\Containers\AppSection\Blog\UI\API\Transformers\DeleteBlogTransformer;
 use App\Containers\AppSection\Blog\UI\API\Transformers\GetBlogsTransformer;
 use App\Containers\AppSection\Blog\UI\API\Transformers\UpdateBlogTransformer;
 use App\Ship\Parents\Controllers\ApiController;
@@ -45,9 +46,9 @@ class Controller extends ApiController
         return $this->transform($blog, UpdateBlogTransformer::class);
     }
 
-    public function deleteBlog(DeleteBlogRequest $request): JsonResponse
+    public function deleteBlog(DeleteBlogRequest $request)
     {
-        app(DeleteBlogAction::class)->run($request);
-        return $this->noContent();
+        $delete = app(DeleteBlogAction::class)->run($request);
+        return $this->transform($delete,DeleteBlogTransformer::class);
     }
 }

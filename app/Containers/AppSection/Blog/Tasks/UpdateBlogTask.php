@@ -21,30 +21,32 @@ class UpdateBlogTask extends Task
         $this->repository = $repository;
     }
 
-    public function run(String $title, String $description)
+    public function run($blogId,String $title, String $description)
     {
-        $blog = new Blog();
-        // $blog->id = $request->input('id');
 
         $token = JWTAuth::getToken();
         $details = JWTAuth::getPayload($token)->toArray();
-        $blog->admin_id = $details["sub"];
-        $adminId = Admin::where('id', $blog->admin_id)->value('id');
-        if(!$adminId){
-            // return response()->json(['status' => 409,'message'=>'No admin is present in this id']);
-            $message ='no admin prsent in this id';
+        $adminId = $details["sub"];
+
+        $adminPresent = Admin::where('id', $adminId)->value('id');
+        $blogIdPresent = Blog::where('id', $blogId)->value('id');
+        $blogsAdmin = Blog::where('id', $blogId)->value('admin_id');
+        if(!$adminPresent){
+            $message ='invalid credentials';
             return $message;
         }
-        $blog->user_id = $adminId;
-        // $blog->title = $request->input('title');
-        // $blog->description = $request->input('description');
-        Blog::where('id',$blog->id)->update([
+        if(!$blogIdPresent){
+            $message = "No blog is present with the given id";
+            return $message;
+        }
+        if($adminPresent == $blogsAdmin){
+            $this->repository->where('id', $blogIdPresent)->update([
+                'admin_id' => $adminId,
                 'title' => $title,
-                'description' => $description,
-                // 'admin_id' => $admin_id,
-
+                'description' => $description
             ]);
-        // Log::info($blog);
-        return $blog;
+            return $message = "Blog updated successfully";
+        }
+        return $message = "No blogs are present for this admin";
     }
 }

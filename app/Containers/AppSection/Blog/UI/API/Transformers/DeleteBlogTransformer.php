@@ -5,7 +5,7 @@ namespace App\Containers\AppSection\Blog\UI\API\Transformers;
 use App\Containers\AppSection\Blog\Models\Blog;
 use App\Ship\Parents\Transformers\Transformer;
 
-class UpdateBlogTransformer extends Transformer
+class DeleteBlogTransformer extends Transformer
 {
     /**
      * @var  array
@@ -24,8 +24,9 @@ class UpdateBlogTransformer extends Transformer
     public function transform(String $blog): array
     {
         $response = [
-            
-            'message' => $blog
+            'id' =>(json_decode($blog))->id,
+            'message' => 'Blog deleted successfully',
+
         ];
 
         return $response;
