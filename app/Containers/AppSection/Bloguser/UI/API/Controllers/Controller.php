@@ -14,8 +14,11 @@ use App\Containers\AppSection\Bloguser\Actions\FindBloguserByIdAction;
 use App\Containers\AppSection\Bloguser\Actions\GetAllBlogusersAction;
 use App\Containers\AppSection\Bloguser\Actions\UpdateBloguserAction;
 use App\Containers\AppSection\Bloguser\Actions\DeleteBloguserAction;
+use App\Containers\AppSection\Bloguser\Actions\UserGetAllBlogsAction;
 use App\Containers\AppSection\Bloguser\UI\API\Requests\BloguserloginRequest;
+use App\Containers\AppSection\Bloguser\UI\API\Requests\UserGetAllBlogsRequest;
 use App\Containers\AppSection\Bloguser\UI\API\Transformers\BloguserloginTransformer;
+use App\Containers\AppSection\Bloguser\UI\API\Transformers\UserGetAllBlogsTransformer;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 
@@ -55,5 +58,11 @@ class Controller extends ApiController
     {
         app(DeleteBloguserAction::class)->run($request);
         return $this->noContent();
+    }
+
+    public function userGetAllBlogs(UserGetAllBlogsRequest $request): array
+    {
+        $blogs = app(UserGetAllBlogsAction::class)->run($request);
+        return $this->transform($blogs, UserGetAllBlogsTransformer::class);
     }
 }

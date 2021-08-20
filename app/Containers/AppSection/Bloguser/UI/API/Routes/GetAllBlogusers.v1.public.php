@@ -22,7 +22,7 @@
 use App\Containers\AppSection\Bloguser\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('blogusers', [Controller::class, 'getAllBlogusers'])
-    ->name('api_bloguser_get_all_blogusers')
-    ->middleware(['auth:api']);
+Route::get('usersgetallblogs', [Controller::class, 'userGetAllBlogs']);
+    // ->name('api_bloguser_get_all_blogusers')
+    // ->middleware(['auth:api']);
 
