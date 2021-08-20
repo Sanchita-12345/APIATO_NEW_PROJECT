@@ -4,7 +4,7 @@ namespace App\Containers\AppSection\Bloguser\UI\API\Requests;
 
 use App\Ship\Parents\Requests\Request;
 
-class BloguserRequest extends Request
+class BloguserloginRequest extends Request
 {
     /**
      * Define which Roles and/or Permissions has access to this request.
@@ -35,10 +35,9 @@ class BloguserRequest extends Request
     public function rules(): array
     {
         return [
-            'name'=>'required|string|between:3,15',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'mobile'=>'required|string',
+            // 'id' => 'required'
+            'email'=>'required|email',
+            'password'=>'required',
         ];
     }
 

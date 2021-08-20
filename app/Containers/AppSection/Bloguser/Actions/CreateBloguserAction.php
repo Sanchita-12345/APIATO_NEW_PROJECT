@@ -4,17 +4,22 @@ namespace App\Containers\AppSection\Bloguser\Actions;
 
 use App\Containers\AppSection\Bloguser\Models\Bloguser;
 use App\Containers\AppSection\Bloguser\Tasks\CreateBloguserTask;
+use App\Containers\AppSection\Bloguser\UI\API\Requests\CreateBloguserRequest;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 
 class CreateBloguserAction extends Action
 {
-    public function run(Request $request): Bloguser
+    public function run(CreateBloguserRequest $request): Bloguser
     {
-        $data = $request->sanitizeInput([
-            // add your request data here
-        ]);
+        $bloguser = app(CreateBloguserTask::class)->run(
+            $request->name,
+            $request->email,
+            $request->password,
+            $request->mobile
+        );
 
-        return app(CreateBloguserTask::class)->run($data);
+        // return app(CreateBloguserTask::class)->run($data);
+        return $bloguser;
     }
 }

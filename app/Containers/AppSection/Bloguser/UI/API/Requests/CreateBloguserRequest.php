@@ -36,6 +36,10 @@ class CreateBloguserRequest extends Request
     {
         return [
             // 'id' => 'required'
+            'name'=>'required|string',
+            'email'=>'required|email',
+            'password'=>'required',
+            'mobile'=>'required',
         ];
     }
 

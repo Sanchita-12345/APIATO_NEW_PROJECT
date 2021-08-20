@@ -22,7 +22,7 @@
 use App\Containers\AppSection\Blog\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::patch('blogs/{id}', [Controller::class, 'updateBlog'])
-    ->name('api_blog_update_blog')
-    ->middleware(['auth:api']);
+Route::post('updateblogs', [Controller::class, 'updateBlog']);
+    // ->name('api_blog_update_blog')
+    // ->middleware(['auth:api']);
 

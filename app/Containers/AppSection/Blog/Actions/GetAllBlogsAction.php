@@ -3,13 +3,18 @@
 namespace App\Containers\AppSection\Blog\Actions;
 
 use App\Containers\AppSection\Blog\Tasks\GetAllBlogsTask;
+use App\Containers\AppSection\Blog\UI\API\Requests\GetAllBlogsRequest;
 use App\Ship\Parents\Actions\Action;
 use App\Ship\Parents\Requests\Request;
 
 class GetAllBlogsAction extends Action
 {
-    public function run(Request $request)
+    public function run(GetAllBlogsRequest $request)
     {
-        return app(GetAllBlogsTask::class)->addRequestCriteria()->run();
+        $blog = app(GetAllBlogsTask::class)->run(
+            
+        );
+
+        return $blog;
     }
 }

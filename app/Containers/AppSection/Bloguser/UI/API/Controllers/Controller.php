@@ -2,6 +2,7 @@
 
 namespace App\Containers\AppSection\Bloguser\UI\API\Controllers;
 
+use App\Containers\AppSection\Bloguser\Actions\BloguserloginAction;
 use App\Containers\AppSection\Bloguser\UI\API\Requests\CreateBloguserRequest;
 use App\Containers\AppSection\Bloguser\UI\API\Requests\DeleteBloguserRequest;
 use App\Containers\AppSection\Bloguser\UI\API\Requests\GetAllBlogusersRequest;
@@ -13,6 +14,8 @@ use App\Containers\AppSection\Bloguser\Actions\FindBloguserByIdAction;
 use App\Containers\AppSection\Bloguser\Actions\GetAllBlogusersAction;
 use App\Containers\AppSection\Bloguser\Actions\UpdateBloguserAction;
 use App\Containers\AppSection\Bloguser\Actions\DeleteBloguserAction;
+use App\Containers\AppSection\Bloguser\UI\API\Requests\BloguserloginRequest;
+use App\Containers\AppSection\Bloguser\UI\API\Transformers\BloguserloginTransformer;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
 
@@ -22,6 +25,12 @@ class Controller extends ApiController
     {
         $bloguser = app(CreateBloguserAction::class)->run($request);
         return $this->created($this->transform($bloguser, BloguserTransformer::class));
+    }
+
+    public function loginUser(BloguserloginRequest $request): JsonResponse
+    {
+        $bloguser = app(BloguserloginAction::class)->run($request);
+        return $this->created($this->transform($bloguser, BloguserloginTransformer::class));
     }
 
     public function findBloguserById(FindBloguserByIdRequest $request): array

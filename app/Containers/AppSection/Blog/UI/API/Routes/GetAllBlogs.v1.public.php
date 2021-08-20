@@ -22,7 +22,7 @@
 use App\Containers\AppSection\Blog\UI\API\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
-Route::get('blogs', [Controller::class, 'getAllBlogs'])
-    ->name('api_blog_get_all_blogs')
-    ->middleware(['auth:api']);
+Route::get('getallblogs', [Controller::class, 'getAllBlogs']);
+    // ->name('api_blog_get_all_blogs')
+    // ->middleware(['auth:api']);
 

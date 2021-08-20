@@ -5,7 +5,7 @@ namespace App\Containers\AppSection\Bloguser\UI\API\Transformers;
 use App\Containers\AppSection\Bloguser\Models\Bloguser;
 use App\Ship\Parents\Transformers\Transformer;
 
-class BloguserTransformer extends Transformer
+class BloguserloginTransformer extends Transformer
 {
     /**
      * @var  array
@@ -21,7 +21,7 @@ class BloguserTransformer extends Transformer
 
     ];
 
-    public function transform(Bloguser $bloguser): array
+    public function transform(String $token): array
     {
         $response = [
             // 'object' => $bloguser->getResourceKey(),
@@ -30,7 +30,7 @@ class BloguserTransformer extends Transformer
             // 'updated_at' => $bloguser->updated_at,
             // 'readable_created_at' => $bloguser->created_at->diffForHumans(),
             // 'readable_updated_at' => $bloguser->updated_at->diffForHumans(),
-            'message'=>'Successfully Created user'
+            $token
         ];
 
         // $response = $this->ifAdmin([
